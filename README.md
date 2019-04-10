@@ -7,4 +7,16 @@ The whole app have been deployed to Heroku. You can check out the link here. htt
 
 Some glimpses of the web application are...
 
+Home Page:
+![alt text](https://github.com/neo-0224/IDCardGen/blob/master/idcard1.png)
 
+
+Login Page:
+![alt text](https://github.com/neo-0224/IDCardGen/blob/master/idcard2.png)
+
+
+Register Page:
+![alt text](https://github.com/neo-0224/IDCardGen/blob/master/idcard3.png)
+
+
+Further you can visit the deployed application link given above to know more about the app.
