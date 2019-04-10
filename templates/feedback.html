@@ -1,0 +1,25 @@
+{% extends 'base_core.html' %}
+
+
+{% block title %}
+Give your lovely feedback, we will be very happy to see it.
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="min-height: 800px; margin-bottom: 200px; margin-top: 100px;">
+	<div class="row justify-content-center">
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card c-shadow-small-h">
+				<div class="card-body">
+					<h3 class="card-title">Give your feedback</h3>
+					<form method="post">
+						{% csrf_token %}
+						{% include 'includes/form.html' %}
+						<center><button type="submit" class="btn c-back-normal c-text-normal c-shadow-small-h">Submit</button></center>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

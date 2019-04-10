@@ -1,0 +1,45 @@
+{% load static %}
+<div class="container" id="footer">
+   <div class="row">
+        <div class="col-md-7 col-sm-12 c-footer-style-main" style="">
+            <div id="connect"> <a href="#"><img src="{% static 'img/icon-facebook.gif' %}" alt="" /></a> <a href="#"><img src="{% static 'img/icon-twitter.gif' %}" alt="" /></a> <a href="#"><img src="{% static 'img/icon-youtube.gif' %}" alt="" /></a> </div>
+        </div>
+        <div class="col-md-5 col-sm-12 c-footer-second">
+            <ul>
+                <li><a href="{% url 'home' %}">Home |</a></li>
+                <li><a href="{% url 'about' %}">About Us |</a></li>
+                <li><a href="/admin/">Administration |</a></li>
+                <li><a href="{% url 'blog' %}">Career |</a></li>
+                <li><a href="{% url 'contact' %}">Contact us</a></li>
+              </ul>
+        </div>
+        <div class="col-md-12 col-sm-12 mt-5 mb-0">
+          <center><p class="lead" style="font-size: 11px;">Developed with love by <a href="https://goodvud.com/" style="text-decoration: none; color: #d4d9d1;">GoodVUD Web Solutions</a></p></center>
+        </div>
+   </div>
+</div>
+
+<style type="text/css">
+  .c-footer-style-main {
+    float: left;
+    text-align: left;
+  }
+
+  .c-footer-second {
+    float: right;
+    text-align: right;
+  }
+
+  @media screen and (max-width: 520px) {
+    .c-footer-style-main {
+      float: left;
+      margin-left: -25px;
+    }
+
+    .c-footer-second {
+      float: right;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+</style>

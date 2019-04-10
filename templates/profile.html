@@ -1,0 +1,196 @@
+{% extends 'base_core.html' %}
+
+
+{% block title %}
+Dive Into Your Profile
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="height: auto; margin-bottom: 200px; margin-top: 100px;">
+	{% block breadcrumb %}
+
+    {% endblock breadcrumb %}
+
+<div class="row c-profile-main p-3">
+	{% include 'includes/sidebarProfile.html' %}
+	<div class="col-md-9 p-3" >
+		{% if user.is_authenticated %}
+			{% if user.is_student %}
+			<center>
+				<h5 class="display-4">Your Profile</h5>
+			</center>
+			<br><hr><br>
+			{% if card %}
+			<div class="row">
+				<div class="col-md-6 col-sm-12" id="printableDivProfile" style="padding: 10px;">
+					<div style="background: url(https://cdn.wallpapersafari.com/32/4/oYBnv4.jpg); height: 240px; padding: 5px; border: 1px solid #fff;" class="c-shadow-medium-h">
+						<div class="row">
+							<div class="col-md-12 c-shadow-small-s" style="background: url(https://cdn.wallpapersafari.com/32/4/oYBnv4.jpg); border-bottom: 1px solid #d4d9d1;">{{ card.school_name }}</div>
+							<div class="col-md-4">
+								{% if card.id_card_photo %}
+								<img src="{{ card.id_card_photo.url }}" width="100%" height="180px" style="margin: 10px;" class="c-shadow-medium-h">
+								{% else %}
+								<img src="https://openclipart.org/image/2400px/svg_to_png/277089/Female-Avatar-5.png" width="100%" height="180px" style="margin: 10px;" class="c-shadow-medium-h">
+								{% endif %}
+							</div>
+							<div class="col-md-8">
+								<div class="row">
+									<div class="col-md-12 p-0">
+										<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Name: <span style="font-weight: bold;">{{ card.full_name }}</span></p><br>
+									</div>
+									<div class="col-md-6 p-0">
+										<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Class: <span style="font-weight: bold;">{{ card.studying_class }}</span></p><br>
+									</div>
+									<div class="col-md-6 p-0">
+										<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Section: <span style="font-weight: bold;">{{ card.section }}</span></p><br>
+									</div>
+									<div class="col-md-12 p-0">
+										<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Mobile Number: <span style="font-weight: bold;">{{ card.mobile_number }}</span></p><br>
+									</div>
+									<div class="col-md-12 p-0">
+										<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Email: <span style="font-weight: bold;">{{ card.email }}</span></p><br>
+									</div>
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5 border-right border-light p-5">
+					{% if user.is_authenticated %}
+					{% if verified.is_verified_by_student %}
+						<h5 class="alert">You have already Verified your card.</h5>
+					{% else %}
+						{% block edit %}
+						<div class="row justify-content-center mt-0">
+					        <div class="col-md-12 col-sm-12">
+					            <div class="card c-shadow-small-h">
+					                <div class="card-body">
+					                    <h3 class="card-title">Is Your Card is Correct? Verify here.</h3>
+									    
+									    <div class="col-md-6 mb-5">
+									        <form method="post" class="mb-4" novalidate>
+									            {% csrf_token %}
+									            {% include 'includes/form.html' %}
+									            <button type="submit" class="btn c-back-normal c-shadow-small-h c-text-normal">Save Changes</button>
+									        </form>
+									    </div>
+					            </div>
+					        </div>
+					    </div>
+					    {% endblock edit %}
+					{% endif %}
+					<button class="btn btn-block c-back-normal c-text-normal c-shadow-small-h mt-1 disabled" onclick="printDivProfile(printableDivProfile)">Print your Card <i class="fas fa-print" style="float: right; font-size: 20px;"></i></button>
+					{% endif %}
+				</div>
+			</div>
+			{% else %}
+			<h4 class="display-4">You don't have any card right now...</h4>
+			{% endif %}
+			{% elif user.is_executive %}
+			<center>
+				<h5 class="display-4">Your Profile</h5>
+			</center>
+			<br><hr><br>
+			{% if all_cards %}
+			<div class="row">
+				{% for id_card in all_cards %}
+					<div class="col-md-5 col-sm-12" id="printableDivProfile" style="padding: 10px; margin: 20px;">
+						<div style="background: url(https://cdn.wallpapersafari.com/32/4/oYBnv4.jpg); height: 240px; padding: 5px; border: 1px solid #fff;" class="c-shadow-medium-h">
+							<div class="row">
+								<div class="col-md-12 c-shadow-small-s" style="background: url(https://cdn.wallpapersafari.com/32/4/oYBnv4.jpg); border-bottom: 1px solid #d4d9d1;">{{ id_card.school_name }}</div>
+								<div class="col-md-4">
+									{% if id_card.id_card_photo %}
+									<img src="{{ id_card.id_card_photo.url }}" width="100%" height="180px" style="margin: 10px;" class="c-shadow-medium-h">
+									{% else %}
+									<img src="https://openclipart.org/image/2400px/svg_to_png/277089/Female-Avatar-5.png" width="100%" height="180px" style="margin: 10px;" class="c-shadow-medium-h">
+									{% endif %}
+								</div>
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-12 p-0">
+											<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Name: <span style="font-weight: bold;">{{ id_card.full_name }}</span></p><br>
+										</div>
+										<div class="col-md-6 p-0">
+											<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Class: <span style="font-weight: bold;">{{ id_card.studying_class }}</span></p><br>
+										</div>
+										<div class="col-md-6 p-0">
+											<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Section: <span style="font-weight: bold;">{{ id_card.section }}</span></p><br>
+										</div>
+										<div class="col-md-12 p-0">
+											<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Mobile Number: <span style="font-weight: bold;">{{ id_card.mobile_number }}</span></p><br>
+										</div>
+										<div class="col-md-12 p-0">
+											<p class="lead" style="margin: 7px 0px 7px 7px; font-size: 14px; float: left; justify-content: left;">Email: <span style="font-weight: bold;">{{ id_card.email }}</span></p><br>
+										</div>
+									</div>
+
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			
+
+			{% elif user.is_photographer %}
+			<center>
+				<h5 class="display-4">Your Profile</h5>
+			</center>
+			<br><hr><br>
+			{% if all_cards %}
+			<div class="row">
+				{% for id_card in all_cards %}
+				<div class="col-md-2 col-sm-4" style="margin: 5px; background: url(https://cdn.wallpapersafari.com/32/4/oYBnv4.jpg);">
+					<div class="row c-shadow-small-h" style="border: 1px solid midnightblue;">
+						<div class="col-md-12" style="height: 120px; padding: 15px;">
+							{% if id_card.id_card_photo %}
+							<img src="{{ id_card.id_card_photo.url }}" width="90px" height="120px" style="margin: 0px 10px 10px 0px;" class="c-shadow-medium-h">
+							{% else %}
+							<img src="https://openclipart.org/image/2400px/svg_to_png/277089/Female-Avatar-5.png" width="90px" height="120px" style="margin: 10px;" class="c-shadow-medium-h">
+							{% endif %}
+						</div>
+						<div class="col-md-12" style="height: 60px; margin-top: 20px;">
+							<center><p class="lead" style="font-size: 12px;">{{ id_card.full_name }} ({{ id_card.mobile_number}}) </p></center>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			{% else %}
+			<h4 class="display-4">Sorry, you are not allowed to access this page. If you have account, please login here. <a href="{% url 'login' %}">Click here to login</a></h4>
+			{% endif %}
+		{% else %}
+			<h4 class="display-4">Sorry, you are not allowed to access this page. If you have account, please login here. <a href="{% url 'login' %}">Click here to login</a></h4>
+		{% endif %}
+	</div>
+</div>
+
+</div>
+<script>
+	function printDivProfile(divName) {
+		var printContents = document.getElementById(divName).innerHTML;
+		var originalContents = document.body.innerHTML;
+
+		document.body.innerHTML = printContents;
+		window.print();
+
+		document.body.content = originalContents;
+	}
+</script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        var inputs = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].type == "button" || inputs[i].type == "submit") {
+                inputs[i].disabled = true;
+            }
+        }
+    };
+</script>
+
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% load static %}
+<div class="col-md-3 border-right border-light p-3">
+	<a class="btn btn-block c-back-normal c-text-normal c-shadow-small-h mt-1" href="{% url 'profile' %}">Overview <i class="fab fa-wpexplorer" style="float: right; font-size: 20px;"></i></a>
+	
+	<span style="margin-top: 100px;"></span>
+	{% if user.is_authenticated %}
+	<a class="btn btn-block c-back-normal c-text-normal c-shadow-small-h mt-5" href="{% url 'password_change' %}">Change Password <i class="fas fa-user-minus" style="float: right; font-size: 20px;"></i></a>
+	<a class="btn btn-block c-back-normal c-text-normal c-shadow-small-h mt-1" href="{% url 'password_change' %}">Delete Account <i class="fas fa-trash-alt" style="float: right; font-size: 20px;"></i></a>
+	{% endif %}
+</div>
